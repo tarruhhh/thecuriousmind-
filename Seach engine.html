@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Search Engine</title>
+    <style>
+        /* Make the page fill the entire height of the browser */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f8f8;
+        }
+
+        /* Center the search container */
+        .search-container {
+            text-align: center;
+        }
+
+        /* Style for the search input field */
+        .search-input {
+            width: 500px;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 30px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+
+        /* Style for the search button */
+        .search-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #357ae8;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <h1>Simple Search Engine</h1>
+   
+        <form action="https://www.google.com/search" method="get">
+            <input type="text" name="q" class="search-input" placeholder="Search Google..." required>
+            <br>
+            <button type="submit" class="search-button">Search</button>
+        </form>
+    </div>
+<a href="The Curious Mind.html">Back</a>
+</body>
+</html>

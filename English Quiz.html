@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+            padding-top: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .quiz-container {
+            margin-top: 20px;
+        }
+        .answer {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .answer:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .restart {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .restart:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+
+<h1>English Quiz</h1>
+
+<div class="quiz-container" id="quizContainer">
+    <div class="question" id="question"></div>
+
+    <div id="answers"></div>
+
+    <div id="result" class="result"></div>
+
+    <button class="restart" id="restartBtn" style="display: none;" onclick="restartQuiz()">Restart Quiz</button>
+</div>
+
+<script>
+
+const englishQuestions = [
+    {
+        question: "What is the synonym of 'happy'?",
+        options: ["sad", "joyful", "angry", "tired"],
+        correctAnswer: 1
+    },
+    {
+        question: "Choose the correct sentence.",
+        options: ["I can goes to the store.", "I going to the store.", "I go to the store.", "I will goes to store."],
+        correctAnswer: 2
+    },
+    {
+        question: "Which of these words is an adjective?",
+        options: ["happiness", "run", "blue", "quickly"],
+        correctAnswer: 2
+    },
+    {
+        question: "What does 'benevolent' mean?",
+        options: ["kind", "mean", "difficult", "happy"],
+        correctAnswer: 0
+    },
+    {
+        question: "What is the antonym of 'ancient'?",
+        options: ["modern", "old", "historic", "timeless"],
+        correctAnswer: 0
+    },
+    {
+        question: "What is the past tense of 'go'?",
+        options: ["going", "gone", "went", "goes"],
+        correctAnswer: 2
+    },
+    {
+        question: "What is the plural form of 'child'?",
+        options: ["children", "childs", "childes", "childrens"],
+        correctAnswer: 0
+    }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function loadQuestion() {
+    const questionElement = document.getElementById("question");
+    const answersElement = document.getElementById("answers");
+
+    const currentQuestion = englishQuestions[currentQuestionIndex];
+    questionElement.textContent = currentQuestion.question;
+
+    
+    answersElement.innerHTML = '';
+
+   
+    currentQuestion.options.forEach((option, index) => {
+        const answerElement = document.createElement('div');
+        answerElement.classList.add('answer');
+        answerElement.textContent = option;
+        answerElement.onclick = () => checkAnswer(index);
+        answersElement.appendChild(answerElement);
+    });
+}
+
+function checkAnswer(selectedIndex) {
+    const currentQuestion = englishQuestions[currentQuestionIndex];
+
+    
+    if (selectedIndex === currentQuestion.correctAnswer) {
+        score++;
+    }
+
+    
+    currentQuestionIndex++;
+
+    
+    if (currentQuestionIndex < englishQuestions.length) {
+        loadQuestion();
+    } else {
+       
+        showResults();
+    }
+}
+
+function showResults() {
+    const resultElement = document.getElementById("result");
+    resultElement.textContent = `Your score is: ${score} out of ${englishQuestions.length}`;
+
+    
+    document.getElementById("restartBtn").style.display = 'inline-block';
+}
+
+function restartQuiz() {
+    score = 0;
+    currentQuestionIndex = 0;
+    document.getElementById("result").textContent = '';
+    document.getElementById("restartBtn").style.display = 'none';
+    loadQuestion();
+}
+
+
+loadQuestion();
+
+</script>
+<button onclick="window.location.href='Literature.html'">Back to Home
+<button onclick="window.location.href='English Answers.html'">Do not click if you haven't taken the quiz!
+
+</body>
+</html>

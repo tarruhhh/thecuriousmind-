@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Quiz Game</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Overall Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .quiz-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .question {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .answer {
+            display: block;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1.2em;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .answer:hover {
+            background-color: #e1e1e1;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.3em;
+            color: #28a745;
+        }
+
+        .restart {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+
+        .restart:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Interactive Subject Quiz</h1>
+
+<div class="quiz-container" id="quizContainer">
+    <div class="question" id="question"></div>
+
+    <div id="answers"></div>
+
+    <div id="result" class="result"></div>
+
+    <button class="restart" id="restartBtn" style="display: none;" onclick="restartQuiz()">Restart Quiz</button>
+</div>
+
+<script>
+  
+    const quizQuestions = [
+        {
+            question: "What is 5 + 3?",
+            options: ["6", "7", "8", "9"],
+            correctAnswer: 2
+        },
+        {
+            question: "What is 12 * 6?",
+            options: ["72", "60", "74", "68"],
+            correctAnswer: 0
+        },
+        {
+            question: "What is 15 / 3?",
+            options: ["4", "3", "5", "6"],
+            correctAnswer: 2
+        },
+        {
+            question: "What is 9 - 4?",
+            options: ["3", "6", "5", "4"],
+            correctAnswer: 2
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    
+    function loadQuestion() {
+        const questionElement = document.getElementById("question");
+        const answersElement = document.getElementById("answers");
+
+        const currentQuestion = quizQuestions[currentQuestionIndex];
+        questionElement.textContent = currentQuestion.question;
+
+       
+        answersElement.innerHTML = '';
+
+        
+        currentQuestion.options.forEach((option, index) => {
+            const answerElement = document.createElement('div');
+            answerElement.classList.add('answer');
+            answerElement.textContent = option;
+            answerElement.onclick = () => checkAnswer(index);
+            answersElement.appendChild(answerElement);
+        });
+    }
+
+    
+    function checkAnswer(selectedIndex) {
+        const currentQuestion = quizQuestions[currentQuestionIndex];
+
+       
+        if (selectedIndex === currentQuestion.correctAnswer) {
+            score++;
+        }
+
+       
+        currentQuestionIndex++;
+
+       
+        if (currentQuestionIndex < quizQuestions.length) {
+            loadQuestion();
+        } else {
+          
+            showResults();
+        }
+    }
+
+ 
+    function showResults() {
+        const resultElement = document.getElementById("result");
+        resultElement.textContent = `Your score is: ${score} out of ${quizQuestions.length}`;
+
+       
+        document.getElementById("restartBtn").style.display = 'inline-block';
+    }
+
+   
+    function restartQuiz() {
+        score = 0;
+        currentQuestionIndex = 0;
+        document.getElementById("result").textContent = '';
+        document.getElementById("restartBtn").style.display = 'none';
+        loadQuestion();
+    }
+
+   
+    loadQuestion();
+</script>
+<button onclick="window.location.href='Math.html'">Back to Home
+<button onclick="window.location.href='Math Answers.html'">Do not click if you haven't taken the quiz!
+
+</body>
+</html>
